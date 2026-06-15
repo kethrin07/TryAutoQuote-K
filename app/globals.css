@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy-900: #0D1B2A;
+  --color-navy-700: #1B3A5C;
+  --color-coral: #FF5C3A;
+  --color-coral-dark: #E84A28;
+  --color-sky-soft: #F0F6FF;
+  --color-ink: #1A202C;
+  --color-muted-ink: #64748B;
+  --color-emerald-accent: #10B981;
+  --color-line: #E2E8F0;
+  --font-display: var(--font-jakarta), system-ui, sans-serif;
+  --font-body: var(--font-inter), system-ui, sans-serif;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes blob {
+  0%, 100% { transform: translate(0,0) scale(1); }
+  33% { transform: translate(30px,-20px) scale(1.05); }
+  66% { transform: translate(-20px,20px) scale(0.95); }
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); color: var(--color-ink); background: #fff; }
+h1,h2,h3,h4 { font-family: var(--font-display); }
+
+.reveal { opacity: 0; }
+.reveal.in-view { animation: fade-up 0.8s ease-out forwards; }
+.float-slow { animation: float-slow 5s ease-in-out infinite; }
+.animate-blob { animation: blob 14s ease-in-out infinite; }
