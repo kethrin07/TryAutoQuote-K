@@ -13,7 +13,7 @@ const TESTIMONIALS = [
     img: "/testimonials/james-t.png",
   },
   {
-    q: "Saved more than I expected. The whole thing took under two minutes — no calls, no spam.",
+    q: "Saved more than I expected. The whole thing took under two minutes. No calls, no spam.",
     n: "Priya K.", l: "Chicago, IL", s: "$730/yr",
     img: "/testimonials/priya-k.png",
   },
@@ -118,7 +118,7 @@ export default function TestimonialsCarousel() {
         </div>
 
         <div className="relative mt-12">
-          {/* Carousel track — gap-5 between cards; each card = (100% - 2*gap) / 3 */}
+          {/* Carousel track */}
           <div
             ref={trackRef}
             onScroll={handleScroll}
@@ -127,7 +127,7 @@ export default function TestimonialsCarousel() {
             {TESTIMONIALS.map((t) => (
               <article
                 key={t.n}
-                className="snap-start shrink-0 w-[80%] sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.834rem)] flex flex-col rounded-3xl border border-[var(--color-line)] bg-white p-6 shadow-sm"
+                className="snap-start shrink-0 w-[80%] sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.834rem)] flex flex-col rounded-xl border border-[var(--color-line)] bg-white p-6 shadow-sm"
               >
                 {/* User image + name row */}
                 <div className="flex items-center gap-3 mb-4">

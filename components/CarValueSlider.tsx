@@ -89,7 +89,7 @@ export default function CarValueSlider({ onCtaClick }: CarValueSliderProps) {
         {/* CTA */}
         <button
           onClick={handleClick}
-          className="w-full bg-[var(--color-navy-900)] hover:bg-[var(--color-coral)] text-white font-black py-4 rounded-2xl text-lg transition shadow-md"
+          className="w-full bg-[var(--color-navy-900)] hover:bg-[var(--color-coral)] text-white font-black py-4 rounded-lg text-lg transition shadow-md"
         >
           {checking ? "Checking Local Rates..." : "Check My Local Rate →"}
         </button>

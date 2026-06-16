@@ -6,10 +6,10 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "sw
 const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-jakarta", display: "swap" });
 
 export const metadata: Metadata = {
-  title: "TryAutoQuote — Compare Auto Insurance in 90 Seconds",
+  title: "TryAutoQuote:Compare Auto Insurance in 90 Seconds",
   description: "Compare 40+ top auto insurers side by side. Free, fast, no spam. Average drivers save $547/year.",
   openGraph: {
-    title: "TryAutoQuote — Compare Auto Insurance in 90 Seconds",
+    title: "TryAutoQuote:Compare Auto Insurance in 90 Seconds",
     description: "Compare 40+ top auto insurers side by side. Free, fast, no spam.",
     type: "website",
   },

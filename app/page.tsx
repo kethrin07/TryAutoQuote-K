@@ -100,9 +100,8 @@ export default function Home() {
       </header>
 
       <section id="top" className="relative overflow-hidden" style={{ background: "linear-gradient(135deg, #0D1B2A 0%, #1B3A5C 100%)" }}>
-        <div className="absolute -top-32 -left-32 h-96 w-96 rounded-full bg-[var(--color-coral)]/20 blur-3xl animate-blob" />
-        <div className="absolute -bottom-40 -right-20 h-[28rem] w-[28rem] rounded-full bg-blue-400/20 blur-3xl animate-blob" style={{ animationDelay: "2s" }} />
-        <div className="absolute top-1/3 right-1/3 h-72 w-72 rounded-full bg-emerald-400/10 blur-3xl animate-blob" style={{ animationDelay: "4s" }} />
+        <div className="absolute -bottom-40 -right-20 h-[28rem] w-[28rem] rounded-full bg-blue-400/15 blur-3xl animate-blob" style={{ animationDelay: "2s" }} />
+        <div className="absolute top-1/3 right-1/3 h-72 w-72 rounded-full bg-blue-300/10 blur-3xl animate-blob" style={{ animationDelay: "4s" }} />
         <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 py-16 sm:px-6 md:py-24 lg:grid-cols-2 lg:py-28">
           <div className="reveal text-white">
             <span className="inline-block rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-white/80">Auto Insurance Comparison</span>
@@ -113,9 +112,9 @@ export default function Home() {
             <form onSubmit={(e) => e.preventDefault()} className="mt-8 max-w-md">
               <label htmlFor="zip-hero" className="sr-only">ZIP code</label>
               <input id="zip-hero" type="text" inputMode="numeric" maxLength={5} placeholder="Enter your ZIP code"
-                className="w-full rounded-2xl border-2 border-white/10 bg-white px-5 py-4 text-lg font-semibold text-[var(--color-ink)] placeholder:text-slate-400 outline-none transition focus:border-[var(--color-coral)] focus:ring-4 focus:ring-[var(--color-coral)]/30" />
+                className="w-full rounded-lg border-2 border-white/10 bg-white px-5 py-4 text-lg font-semibold text-[var(--color-ink)] placeholder:text-slate-400 outline-none transition focus:border-[var(--color-coral)] focus:ring-4 focus:ring-[var(--color-coral)]/30" />
               <button type="button" onClick={(e) => { e.preventDefault(); document.getElementById("zip-hero")?.focus(); }}
-                className="mt-3 w-full rounded-2xl bg-[var(--color-coral)] px-6 py-4 text-sm font-extrabold uppercase tracking-widest text-white shadow-[0_10px_30px_-10px_rgba(255,92,58,0.6)] transition hover:scale-[1.02] hover:bg-[var(--color-coral-dark)]">
+                className="mt-3 w-full rounded-lg bg-[var(--color-coral)] px-6 py-4 text-sm font-extrabold uppercase tracking-widest text-white shadow-[0_10px_30px_-10px_rgba(255,92,58,0.6)] transition hover:scale-[1.02] hover:bg-[var(--color-coral-dark)]">
                 Get My Free Quotes →
               </button>
             </form>
@@ -126,9 +125,9 @@ export default function Home() {
             </div>
             <p className="mt-4 text-xs text-white/55">Prefer to call? <a href="tel:18005550123" className="font-semibold text-white/80 underline-offset-2 hover:underline">1-800-555-0123</a></p>
           </div>
-          <div className="reveal relative">
-            <Image src="/hero-illustration.png" alt="Compare auto insurance quotes" width={1024} height={1024} priority
-              className="mx-auto w-full max-w-lg h-auto float-slow drop-shadow-[0_30px_60px_rgba(0,0,0,0.5)]" />
+          <div className="reveal relative flex items-center justify-center">
+            <Image src="/hero-illustration.png" alt="Compare auto insurance quotes" width={800} height={800} priority
+              className="w-full max-w-xl h-auto object-cover shadow-[0_30px_80px_-10px_rgba(0,0,0,0.6)] ring-1 ring-white/10" />
           </div>
         </div>
       </section>
@@ -188,8 +187,8 @@ export default function Home() {
                 ),
               },
             ].map((f) => (
-              <div key={f.title} className="reveal rounded-3xl bg-white p-7 shadow-sm flex flex-col gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-[var(--color-coral)]/10 flex items-center justify-center text-[var(--color-coral)] shrink-0">
+              <div key={f.title} className="reveal rounded-xl bg-white p-7 shadow-sm flex flex-col gap-4">
+                <div className="w-12 h-12 rounded-lg bg-[var(--color-coral)]/10 flex items-center justify-center text-[var(--color-coral)] shrink-0">
                   {f.icon}
                 </div>
                 <h3 className="font-bold text-[var(--color-ink)]">{f.title}</h3>
@@ -200,10 +199,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Estimate calculator — white */}
+      {/* Estimate calculator */}
       <CarValueSlider onCtaClick={triggerHeroHighlight} />
 
-      {/* How it works — #F0F6FF */}
+      {/* How it works */}
       <section id="how" className="py-20" style={{ backgroundColor: "#F0F6FF" }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="reveal mx-auto max-w-2xl text-center">
@@ -211,16 +210,16 @@ export default function Home() {
           </div>
           <div className="mt-12 grid items-center gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-14">
             <Image src="/how-it-works.jpg" alt="Mobile auto insurance comparison" width={1024} height={768}
-              className="reveal w-full h-auto rounded-3xl shadow-xl" />
+              className="reveal w-full h-auto rounded-xl shadow-xl" />
             <div className="grid gap-5">
-              <div className="reveal rounded-3xl bg-white p-7 shadow-sm ring-1 ring-[var(--color-line)]">
+              <div className="reveal rounded-xl bg-white p-7 shadow-sm ring-1 ring-[var(--color-line)]">
                 <p className="leading-relaxed text-[var(--color-muted-ink)]">We take all the information you provide regarding yourself and your vehicle and compare it in real time to our live database connected to dozens of top insurance carriers. This results in a list of policies that are specific to your personal circumstances and are from carriers that are willing to insure you.</p>
               </div>
-              <div className="reveal rounded-3xl bg-white p-7 shadow-sm ring-1 ring-[var(--color-line)]">
+              <div className="reveal rounded-xl bg-white p-7 shadow-sm ring-1 ring-[var(--color-line)]">
                 <h3 className="mb-2 font-bold text-[var(--color-ink)]">Why personalized results matter</h3>
                 <p className="leading-relaxed text-[var(--color-muted-ink)]">Many of us spend countless hours filling endless documentation just to find out there is no relevant policy or getting declined for insurance. Our platform makes sure you are presented with the top options in one place.</p>
               </div>
-              <div className="reveal flex items-start gap-4 rounded-3xl bg-[var(--color-coral)]/10 p-6 ring-1 ring-[var(--color-coral)]/20">
+              <div className="reveal flex items-start gap-4 rounded-xl bg-[var(--color-coral)]/10 p-6 ring-1 ring-[var(--color-coral)]/20">
                 <CheckIcon />
                 <p className="text-sm font-semibold text-[var(--color-ink)]">The service is free and you are never obligated to buy the presented policy.</p>
               </div>
@@ -229,7 +228,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials — white */}
+      {/* Testimonials */}
       <div id="reviews">
         <TestimonialsCarousel />
       </div>
@@ -265,7 +264,7 @@ export default function Home() {
             <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">Common Questions</h2>
             <p className="mt-3 text-[var(--color-muted-ink)]">Everything you need to know before getting your quotes.</p>
           </div>
-          <div className="mt-10 divide-y divide-[var(--color-line)] rounded-2xl border border-[var(--color-line)] bg-white shadow-sm">
+          <div className="mt-10 divide-y divide-[var(--color-line)] rounded-lg border border-[var(--color-line)] bg-white shadow-sm">
             {FAQS.map((f, i) => {
               const open = openFaq === i;
               return (
@@ -293,9 +292,9 @@ export default function Home() {
           </h2>
 
           <div className="reveal mt-14 flex flex-col sm:flex-row items-stretch">
-            {/* Left — Get a Quote Online */}
+            {/* Left: Get a Quote Online */}
             <div className="flex flex-1 flex-col items-center px-6 py-8 text-center sm:px-10">
-              <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-[var(--color-coral)]/10 text-[var(--color-coral)]">
+              <div className="flex h-20 w-20 items-center justify-center rounded-lg bg-[var(--color-coral)]/10 text-[var(--color-coral)]">
                 <svg viewBox="0 0 24 24" className="h-9 w-9" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="2" y="3" width="20" height="14" rx="2"/><polyline points="8 21 12 17 16 21"/><line x1="12" y1="17" x2="12" y2="21"/>
                 </svg>
@@ -305,7 +304,7 @@ export default function Home() {
                 Our easy-to-use tools let you compare quotes from top carriers side by side, all at once and in minutes.
               </p>
               <form onSubmit={(e) => e.preventDefault()} className="mt-6 w-full max-w-sm space-y-3">
-                <div className="flex items-center gap-2 rounded-xl border-2 border-[var(--color-line)] bg-white px-4 py-3 transition focus-within:border-[var(--color-coral)] focus-within:ring-2 focus-within:ring-[var(--color-coral)]/20">
+                <div className="flex items-center gap-2 rounded-lg border-2 border-[var(--color-line)] bg-white px-4 py-3 transition focus-within:border-[var(--color-coral)] focus-within:ring-2 focus-within:ring-[var(--color-coral)]/20">
                   <svg viewBox="0 0 24 24" className="h-4 w-4 shrink-0 text-[var(--color-muted-ink)]" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
                   </svg>
@@ -329,9 +328,9 @@ export default function Home() {
               <div className="h-px flex-1 bg-[var(--color-line)] sm:h-auto sm:w-px sm:flex-1" />
             </div>
 
-            {/* Right — Call an Agent */}
+            {/* Right: Call an Agent */}
             <div className="flex flex-1 flex-col items-center px-6 py-8 text-center sm:px-10">
-              <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-[var(--color-navy-900)]/10 text-[var(--color-navy-900)]">
+              <div className="flex h-20 w-20 items-center justify-center rounded-lg bg-[var(--color-navy-900)]/10 text-[var(--color-navy-900)]">
                 <svg viewBox="0 0 24 24" className="h-9 w-9" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92Z"/>
                 </svg>
