@@ -106,10 +106,6 @@ export default function Home() {
             <a href="/contact" className="transition hover:text-[var(--color-ink)]">Contact</a>
           </nav>
           <div className="flex items-center gap-2 sm:gap-4">
-            <a href="tel:18005550123" className="hidden items-center gap-2 text-sm font-semibold sm:flex">
-              <PhoneIcon className="h-4 w-4 text-[var(--color-coral)]" />
-              1-800-555-0123
-            </a>
             <a href="#top" onClick={handleGetQuote} className="rounded-full bg-[var(--color-coral)] px-4 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-sm transition hover:scale-105 hover:bg-[var(--color-coral-dark)] sm:px-5 sm:text-sm">
               Get a Quote
             </a>
@@ -142,7 +138,6 @@ export default function Home() {
               <span className="inline-flex items-center gap-1.5"><CheckIcon /> No credit check</span>
               <span className="inline-flex items-center gap-1.5"><CheckIcon /> Takes 2 minutes</span>
             </div>
-            <p className="mt-4 text-xs text-white/55">Prefer to call? <a href="tel:18005550123" className="font-semibold text-white/80 underline-offset-2 hover:underline">1-800-555-0123</a></p>
           </div>
           <div className="reveal relative flex items-center justify-center">
             <Image src="/hero-illustration.png" alt="Compare auto insurance quotes" width={800} height={800} priority
@@ -318,67 +313,47 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="contact" className="py-20" style={{ backgroundColor: "#F0F6FF" }}>
-        <div className="mx-auto max-w-5xl px-4 sm:px-6">
-          <h2 className="reveal text-center text-4xl font-extrabold tracking-tight text-[var(--color-ink)] sm:text-5xl">
-            It&apos;s easy to start saving.
-          </h2>
+      <section id="contact" className="py-14" style={{ backgroundColor: "#F0F6FF" }}>
+        <div className="mx-auto max-w-4xl px-4 sm:px-6">
+          <div className="reveal flex flex-col sm:flex-row items-center gap-8 sm:gap-12">
 
-          <div className="reveal mt-14 flex flex-col sm:flex-row items-stretch">
-            {/* Left: Get a Quote Online */}
-            <div className="flex flex-1 flex-col items-center px-6 py-8 text-center sm:px-10">
-              <div className="flex h-20 w-20 items-center justify-center rounded-lg bg-[var(--color-coral)]/10 text-[var(--color-coral)]">
-                <svg viewBox="0 0 24 24" className="h-9 w-9" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="2" y="3" width="20" height="14" rx="2"/><polyline points="8 21 12 17 16 21"/><line x1="12" y1="17" x2="12" y2="21"/>
-                </svg>
-              </div>
-              <h3 className="mt-5 text-xl font-extrabold text-[var(--color-ink)]">Get a Quote Online</h3>
-              <p className="mt-2 max-w-xs text-sm leading-relaxed text-[var(--color-muted-ink)]">
-                Our easy-to-use tools let you compare quotes from top carriers side by side, all at once and in minutes.
-              </p>
-              <form onSubmit={(e) => { e.preventDefault(); startQuiz(zipCta, "zip-cta"); }} className="mt-6 w-full max-w-sm space-y-3">
-                <div className="flex items-center gap-2 rounded-lg border-2 border-[var(--color-line)] bg-white px-4 py-3 transition focus-within:border-[var(--color-coral)] focus-within:ring-2 focus-within:ring-[var(--color-coral)]/20">
+            {/* Left: ZIP form */}
+            <div className="w-full sm:w-auto sm:flex-1">
+              <form onSubmit={(e) => { e.preventDefault(); startQuiz(zipCta, "zip-cta"); }} className="flex flex-col gap-3">
+                <div className="flex items-center gap-2 rounded-xl border-2 border-[var(--color-line)] bg-white px-4 py-3 transition focus-within:border-[var(--color-coral)] focus-within:ring-2 focus-within:ring-[var(--color-coral)]/20">
                   <svg viewBox="0 0 24 24" className="h-4 w-4 shrink-0 text-[var(--color-muted-ink)]" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
                   </svg>
-                  <input id="zip-cta" type="text" inputMode="numeric" maxLength={5} placeholder="ZIP code"
+                  <input id="zip-cta" type="text" inputMode="numeric" maxLength={5} placeholder="Enter your ZIP code"
                     value={zipCta} onChange={(e) => setZipCta(e.target.value)}
                     className="flex-1 bg-transparent text-sm font-semibold text-[var(--color-ink)] placeholder:text-slate-400 outline-none" />
                 </div>
                 <button type="submit"
-                  className="w-full rounded-xl bg-[var(--color-coral)] py-3 text-sm font-extrabold uppercase tracking-widest text-white shadow-sm transition hover:bg-[var(--color-coral-dark)] hover:scale-[1.02]">
+                  className="rounded-xl bg-[var(--color-coral)] py-3 text-sm font-extrabold uppercase tracking-widest text-white shadow-sm transition hover:bg-[var(--color-coral-dark)] hover:scale-[1.02]">
                   Get My Quotes →
                 </button>
+                <div className="flex items-center gap-4 text-xs text-[var(--color-muted-ink)]">
+                  <span className="inline-flex items-center gap-1"><CheckIcon /> Free</span>
+                  <span className="inline-flex items-center gap-1"><CheckIcon /> No credit check</span>
+                  <span className="inline-flex items-center gap-1"><CheckIcon /> 90 seconds</span>
+                </div>
               </form>
-              <p className="mt-3 text-xs text-[var(--color-muted-ink)]">Free · No credit check · Takes 90 seconds</p>
             </div>
 
-            {/* OR Divider */}
-            <div className="flex flex-row items-center sm:flex-col">
-              <div className="h-px flex-1 bg-[var(--color-line)] sm:h-auto sm:w-px sm:flex-1" />
-              <div className="mx-4 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[var(--color-navy-900)] text-xs font-bold text-white sm:my-4 sm:mx-0">
-                OR
-              </div>
-              <div className="h-px flex-1 bg-[var(--color-line)] sm:h-auto sm:w-px sm:flex-1" />
-            </div>
+            {/* Divider */}
+            <div className="hidden sm:block w-px self-stretch bg-[var(--color-line)]" />
 
-            {/* Right: Call an Agent */}
-            <div className="flex flex-1 flex-col items-center px-6 py-8 text-center sm:px-10">
-              <div className="flex h-20 w-20 items-center justify-center rounded-lg bg-[var(--color-navy-900)]/10 text-[var(--color-navy-900)]">
-                <svg viewBox="0 0 24 24" className="h-9 w-9" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92Z"/>
-                </svg>
-              </div>
-              <h3 className="mt-5 text-xl font-extrabold text-[var(--color-ink)]">Call an Agent</h3>
-              <p className="mt-2 max-w-xs text-sm leading-relaxed text-[var(--color-muted-ink)]">
-                Prefer a friendly voice? Our licensed agents are standing by to help you find the best rate.
+            {/* Right: Heading */}
+            <div className="w-full sm:w-auto sm:flex-1 text-center sm:text-left">
+              <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-coral)] mb-2">Start saving today</p>
+              <h2 className="text-2xl font-extrabold tracking-tight text-[var(--color-ink)] leading-snug">
+                It&apos;s easy to<br />start saving.
+              </h2>
+              <p className="mt-2 text-sm text-[var(--color-muted-ink)] leading-relaxed">
+                Compare 40+ top insurers side by side - in minutes, not hours.
               </p>
-              <a href="tel:18005550123"
-                className="mt-6 text-3xl font-extrabold tracking-tight text-[var(--color-navy-900)] transition hover:text-[var(--color-coral)]">
-                1-800-555-0123
-              </a>
-              <p className="mt-2 text-xs text-[var(--color-muted-ink)]">No obligation · Free to call</p>
             </div>
+
           </div>
         </div>
       </section>
