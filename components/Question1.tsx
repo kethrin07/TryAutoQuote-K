@@ -87,6 +87,7 @@ export default function Question1() {
                       src={make.logo}
                       alt={make.name}
                       fill
+                      sizes="64px"
                       className="object-contain"
                     />
                   </div>

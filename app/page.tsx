@@ -67,7 +67,7 @@ export default function Home() {
       return;
     }
     updateForm({ zipCode: zip.trim() });
-    router.push("/quote/1_map");
+    router.push("/quote/1");
   };
 
   const scrollTo = (id: string) => (e: React.MouseEvent) => {

@@ -15,6 +15,20 @@ export type FormData = {
   street?: string;
   email?: string;
   phone?: string;
+  firstName?: string;
+  lastName?: string;
+  dob?: string;
+  gender?: string;
+  married?: string;
+  homeowner?: string;
+  military?: string;
+  education?: string;
+  creditScore?: string;
+  currentInsurance?: string;
+  continuousCoverage?: string;
+  activeLicense?: string;
+  sr22Filed?: string;
+  ticketsLast3Years?: string;
   [key: string]: unknown;
 };
 
