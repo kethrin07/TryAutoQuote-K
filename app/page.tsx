@@ -361,7 +361,7 @@ export default function Home() {
       <footer className="py-14 text-white" style={{ backgroundColor: "#0D1B2A" }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="grid gap-10 md:grid-cols-4">
-            <div>
+            <div className="md:col-span-2">
               <div className="text-xl font-extrabold tracking-tight">TryAuto<span className="text-[var(--color-coral)]">Quote</span></div>
               <p className="mt-3 max-w-xs text-sm text-white/60">Compare top auto insurance carriers in 90 seconds. Save up to $547 a year.</p>
             </div>
@@ -382,21 +382,11 @@ export default function Home() {
               </ul>
             </div>
             <div>
-              <h4 className="text-sm font-bold uppercase tracking-widest text-white">Resources</h4>
-              <ul className="mt-4 space-y-2 text-sm text-white/60">
-                {["Insurance Guide", "Savings Calculator", "Blog", "Help Center"].map((x) => (
-                  <li key={x}><a href="#" className="transition hover:text-white">{x}</a></li>
-                ))}
-              </ul>
-            </div>
-            <div>
               <h4 className="text-sm font-bold uppercase tracking-widest text-white">Legal</h4>
               <ul className="mt-4 space-y-2 text-sm text-white/60">
                 {[
                   { label: "Privacy Policy", href: "/privacy-policy" },
                   { label: "Terms of Use", href: "/terms-of-use" },
-                  { label: "Licenses", href: "#" },
-                  { label: "Do Not Sell My Info", href: "#" },
                 ].map((x) => (
                   <li key={x.label}><a href={x.href} className="transition hover:text-white">{x.label}</a></li>
                 ))}
