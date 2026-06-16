@@ -94,8 +94,9 @@ export default function Home() {
       <QuoteHighlighter />
       <header className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-[var(--color-line)]">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
-          <a href="#top" onClick={scrollTo("top")} className="text-xl font-extrabold tracking-tight">
-            TryAuto<span className="text-[var(--color-coral)]">Quote</span>
+          <a href="#top" onClick={scrollTo("top")} className="flex items-center gap-2">
+            <Image src="/Logo-no-bg.png" alt="TryAutoQuote" width={36} height={36} className="h-9 w-auto" />
+            <span className="text-xl font-extrabold tracking-tight">TryAuto<span className="text-[var(--color-coral)]">Quote</span></span>
           </a>
           <nav className="hidden items-center gap-8 text-sm font-medium text-[var(--color-muted-ink)] md:flex">
             <a href="#why" onClick={scrollTo("why")} className="transition hover:text-[var(--color-ink)]">Why Us</a>

@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 
 const PhoneIcon = () => (
   <svg className="h-4 w-4 text-[var(--color-coral)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -11,8 +12,9 @@ export default function SiteNavbar() {
   return (
     <header className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-[var(--color-line)]">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
-        <Link href="/" className="text-xl font-extrabold tracking-tight">
-          TryAuto<span className="text-[var(--color-coral)]">Quote</span>
+        <Link href="/" className="flex items-center gap-2">
+          <Image src="/Logo-no-bg.png" alt="TryAutoQuote" width={36} height={36} className="h-9 w-auto" />
+          <span className="text-xl font-extrabold tracking-tight">TryAuto<span className="text-[var(--color-coral)]">Quote</span></span>
         </Link>
         <nav className="hidden items-center gap-8 text-sm font-medium text-[var(--color-muted-ink)] md:flex">
           <Link href="/#why" className="transition hover:text-[var(--color-ink)]">Why Us</Link>
