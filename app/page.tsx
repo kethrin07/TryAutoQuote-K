@@ -40,6 +40,8 @@ function useReveal() {
 
 import CarValueSlider from "@/components/CarValueSlider";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
+import QuoteHighlighter from "@/components/QuoteHighlighter";
+import CountUp from "@/components/CountUp";
 
 const CheckIcon = () => (
   <svg className="h-4 w-4 text-[var(--color-emerald-accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -56,23 +58,50 @@ export default function Home() {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const triggerHeroHighlight = () => {
+    document.getElementById("top")?.scrollIntoView({ behavior: "smooth" });
+    setTimeout(() => {
+      window.dispatchEvent(new CustomEvent("highlight-quote-input"));
+      document.getElementById("zip-hero")?.focus();
+    }, 600);
+  };
+
+  const handleGetQuote = (e: React.MouseEvent) => {
+    e.preventDefault();
+    triggerHeroHighlight();
+  };
+
+  const handleCtaHighlight = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const input = document.getElementById("zip-cta") as HTMLInputElement | null;
+    if (!input) return;
+    input.focus();
+    input.style.transition = "box-shadow 0.3s ease";
+    input.style.boxShadow = "0 0 0 3px rgba(56, 182, 201, 0.7)";
+    setTimeout(() => { input.style.boxShadow = "none"; }, 1000);
+  };
+
   return (
     <div className="bg-white text-[var(--color-ink)]">
+      <QuoteHighlighter />
       <header className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-[var(--color-line)]">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
           <a href="#top" onClick={scrollTo("top")} className="text-xl font-extrabold tracking-tight">
             TryAuto<span className="text-[var(--color-coral)]">Quote</span>
           </a>
           <nav className="hidden items-center gap-8 text-sm font-medium text-[var(--color-muted-ink)] md:flex">
-            <a href="#how" onClick={scrollTo("how")} className="transition hover:text-[var(--color-ink)]">How it works</a>
+            <a href="#why" onClick={scrollTo("why")} className="transition hover:text-[var(--color-ink)]">Why Us</a>
+            <a href="#how" onClick={scrollTo("how")} className="transition hover:text-[var(--color-ink)]">How it Works</a>
+            <a href="#reviews" onClick={scrollTo("reviews")} className="transition hover:text-[var(--color-ink)]">Reviews</a>
             <a href="#faq" onClick={scrollTo("faq")} className="transition hover:text-[var(--color-ink)]">FAQ</a>
+            <a href="#contact" onClick={scrollTo("contact")} className="transition hover:text-[var(--color-ink)]">Contact</a>
           </nav>
           <div className="flex items-center gap-2 sm:gap-4">
             <a href="tel:18005550123" className="hidden items-center gap-2 text-sm font-semibold sm:flex">
               <PhoneIcon className="h-4 w-4 text-[var(--color-coral)]" />
               1-800-555-0123
             </a>
-            <a href="#top" onClick={scrollTo("top")} className="rounded-full bg-[var(--color-coral)] px-4 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-sm transition hover:scale-105 hover:bg-[var(--color-coral-dark)] sm:px-5 sm:text-sm">
+            <a href="#top" onClick={handleGetQuote} className="rounded-full bg-[var(--color-coral)] px-4 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-sm transition hover:scale-105 hover:bg-[var(--color-coral-dark)] sm:px-5 sm:text-sm">
               Get a Quote
             </a>
           </div>
@@ -112,7 +141,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative py-20 overflow-hidden" style={{ backgroundColor: "#F0F6FF" }}>
+      <section id="why" className="relative py-20 overflow-hidden" style={{ backgroundColor: "#F0F6FF" }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="reveal text-center">
             <div className="flex justify-center gap-1.5 mb-6">
@@ -141,8 +170,10 @@ export default function Home() {
                 title: "No spam calls",
                 body: "Compare quotes without a flood of follow-up calls. You decide who to talk to. We never sell your phone number to telemarketers. Your contact details stay between you and the carrier you choose.",
                 icon: (
-                  <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="1" y1="1" x2="23" y2="23"/><path d="M16.5 16.5L19 19a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 5 14M10.29 10.29A19.5 19.5 0 0 0 5.07 8.67 2 2 0 0 0 4.11 11L4 11a2 2 0 0 0 2 2"/>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M10.1 13.9a14 14 0 0 0 3.732 2.668 1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2 18 18 0 0 1-12.728-5.272"/>
+                    <path d="M22 2 2 22"/>
+                    <path d="M4.76 13.582A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 .244.473"/>
                   </svg>
                 ),
               },
@@ -178,7 +209,7 @@ export default function Home() {
       </section>
 
       {/* Estimate calculator — white */}
-      <CarValueSlider onCtaClick={() => document.getElementById("top")?.scrollIntoView({ behavior: "smooth" })} />
+      <CarValueSlider onCtaClick={triggerHeroHighlight} />
 
       {/* How it works — #F0F6FF */}
       <section id="how" className="py-20" style={{ backgroundColor: "#F0F6FF" }}>
@@ -207,7 +238,9 @@ export default function Home() {
       </section>
 
       {/* Testimonials — white */}
-      <TestimonialsCarousel />
+      <div id="reviews">
+        <TestimonialsCarousel />
+      </div>
 
       <section className="relative py-16 overflow-hidden" style={{ background: "linear-gradient(135deg, #0D1B2A 0%, #1B3A5C 100%)" }}>
         <Image src="/highway.jpg" alt="" fill sizes="100vw" className="object-cover opacity-25" />
@@ -215,12 +248,18 @@ export default function Home() {
         <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
           <div className="grid divide-y divide-white/10 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
             {[
-              { v: "$547", l: "Average annual savings per user" },
-              { v: "40+", l: "Insurance providers compared" },
-              { v: "90s", l: "Average time to get your quotes" },
+              { prefix: "$", value: 547, suffix: "",  l: "Average annual savings per user" },
+              { prefix: "",  value: 40,  suffix: "+", l: "Insurance providers compared" },
+              { prefix: "",  value: 90,  suffix: "s", l: "Average time to get your quotes" },
             ].map((s) => (
               <div key={s.l} className="reveal px-6 py-6 text-center">
-                <div className="text-5xl font-extrabold tracking-tight text-white sm:text-6xl">{s.v}</div>
+                <CountUp
+                  value={s.value}
+                  prefix={s.prefix}
+                  suffix={s.suffix}
+                  duration={2000}
+                  className="text-5xl font-extrabold tracking-tight text-white sm:text-6xl"
+                />
                 <div className="mt-2 text-sm font-medium text-white/60">{s.l}</div>
               </div>
             ))}
@@ -255,16 +294,16 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[var(--color-coral)] py-20">
+      <section id="contact" className="relative overflow-hidden bg-[var(--color-coral)] py-20">
         <div className="absolute -top-20 -left-20 h-80 w-80 rounded-full bg-white/10 blur-3xl" />
         <div className="absolute -bottom-20 -right-20 h-80 w-80 rounded-full bg-white/10 blur-3xl" />
         <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-6">
           <h2 className="reveal text-4xl font-extrabold tracking-tight text-white sm:text-5xl">Ready to Stop Overpaying?</h2>
           <p className="reveal mt-4 text-lg text-white/85">Join 50,000+ drivers who found a better rate.</p>
           <form onSubmit={(e) => e.preventDefault()} className="reveal mx-auto mt-8 flex max-w-xl flex-col gap-3 sm:flex-row">
-            <input type="text" inputMode="numeric" maxLength={5} placeholder="Enter your ZIP code"
+            <input id="zip-cta" type="text" inputMode="numeric" maxLength={5} placeholder="Enter your ZIP code"
               className="flex-1 rounded-2xl border-2 border-white/30 bg-white px-5 py-4 text-lg font-semibold text-[var(--color-ink)] placeholder:text-slate-400 outline-none transition focus:border-white focus:ring-4 focus:ring-white/40" />
-            <button className="rounded-2xl bg-[var(--color-navy-900)] px-7 py-4 text-sm font-extrabold uppercase tracking-widest text-white shadow-lg transition hover:scale-[1.03] hover:bg-black">Compare Now</button>
+            <button onClick={handleCtaHighlight} className="rounded-2xl bg-[var(--color-navy-900)] px-7 py-4 text-sm font-extrabold uppercase tracking-widest text-white shadow-lg transition hover:scale-[1.03] hover:bg-black">Compare Now</button>
           </form>
           <p className="reveal mt-4 text-sm text-white/75">No spam. No sales calls. Takes 90 seconds.</p>
         </div>
@@ -277,8 +316,23 @@ export default function Home() {
               <div className="text-xl font-extrabold tracking-tight">TryAuto<span className="text-[var(--color-coral)]">Quote</span></div>
               <p className="mt-3 max-w-xs text-sm text-white/60">Compare top auto insurance carriers in 90 seconds. Save up to $547 a year.</p>
             </div>
+            <div>
+              <h4 className="text-sm font-bold uppercase tracking-widest text-white">Navigate</h4>
+              <ul className="mt-4 space-y-2 text-sm text-white/60">
+                {[
+                  { label: "Why Us", href: "#why" },
+                  { label: "How it Works", href: "#how" },
+                  { label: "Reviews", href: "#reviews" },
+                  { label: "FAQ", href: "#faq" },
+                  { label: "Contact", href: "#contact" },
+                ].map((x) => (
+                  <li key={x.label}>
+                    <a href={x.href} className="transition hover:text-white">{x.label}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
             {[
-              { h: "Company", l: ["About", "Careers", "Press", "Contact"] },
               { h: "Resources", l: ["Insurance Guide", "Savings Calculator", "Blog", "Help Center"] },
               { h: "Legal", l: ["Privacy Policy", "Terms of Use", "Licenses", "Do Not Sell My Info"] },
             ].map((col) => (
