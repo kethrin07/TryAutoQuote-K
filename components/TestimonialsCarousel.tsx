@@ -169,13 +169,13 @@ export default function TestimonialsCarousel() {
               <ChevronLeft />
             </button>
 
-            {TESTIMONIALS.map((_, i) => (
+            {[0, 1, 2].map((page) => (
               <button
-                key={i}
-                onClick={() => goTo(i)}
-                aria-label={`Go to testimonial ${i + 1}`}
+                key={page}
+                onClick={() => goTo(page)}
+                aria-label={`Go to page ${page + 1}`}
                 className={`h-2.5 rounded-full transition-all duration-300 ${
-                  i === current
+                  Math.min(current, 2) === page
                     ? "w-7 bg-[var(--color-coral)]"
                     : "w-2.5 bg-slate-200 hover:bg-slate-300"
                 }`}
@@ -183,7 +183,7 @@ export default function TestimonialsCarousel() {
             ))}
 
             <button
-              onClick={() => goTo(Math.min(TESTIMONIALS.length - 1, current + 1))}
+              onClick={() => goTo(Math.min(2, current + 1))}
               disabled={atEnd}
               className="grid h-10 w-10 place-items-center rounded-full border border-[var(--color-line)] bg-white shadow-sm transition hover:border-[var(--color-coral)] hover:text-[var(--color-coral)] disabled:opacity-30 disabled:cursor-not-allowed"
               aria-label="Next testimonial"
