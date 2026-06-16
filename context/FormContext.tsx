@@ -5,7 +5,6 @@ type Vehicle = {
   vehicleMake?: string;
   vehicleYear?: number;
   vehicleModel?: string;
-  [key: string]: unknown;
 };
 
 export type FormData = {
@@ -29,7 +28,6 @@ export type FormData = {
   activeLicense?: string;
   sr22Filed?: string;
   ticketsLast3Years?: string;
-  [key: string]: unknown;
 };
 
 type FormContextType = {
