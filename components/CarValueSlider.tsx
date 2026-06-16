@@ -31,7 +31,7 @@ export default function CarValueSlider({ onCtaClick }: CarValueSliderProps) {
   };
 
   return (
-    <section className="relative w-full flex justify-center py-14 bg-[var(--color-sky-soft)] px-8">
+    <section className="relative w-full flex justify-center py-14 bg-white px-8">
       <div className="max-w-2xl mx-auto text-center space-y-6">
 
         <h2 className="text-2xl md:text-3xl font-black text-slate-900">

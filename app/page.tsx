@@ -2,13 +2,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-const CARRIERS = ["Geico","Progressive","State Farm","Allstate","Liberty Mutual","Nationwide","Farmers","Travelers","USAA","AAA","American Family","Erie"];
 
-const TESTIMONIALS = [
-  { q: "I switched in 10 minutes and my rate dropped immediately. Couldn't believe how simple it was.", n: "Sarah M.", l: "Austin, TX", s: "$612/yr" },
-  { q: "Got 6 quotes side by side. Picked the cheapest one with the same coverage I already had.", n: "James T.", l: "Orlando, FL", s: "$480/yr" },
-  { q: "Saved more than I expected. The whole thing took under two minutes — no calls, no spam.", n: "Priya K.", l: "Chicago, IL", s: "$730/yr" },
-];
 const FAQS = [
   {
   q: "What factors affect my car insurance premium?",
@@ -45,6 +39,7 @@ function useReveal() {
 }
 
 import CarValueSlider from "@/components/CarValueSlider";
+import TestimonialsCarousel from "@/components/TestimonialsCarousel";
 
 const CheckIcon = () => (
   <svg className="h-4 w-4 text-[var(--color-emerald-accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -52,7 +47,6 @@ const CheckIcon = () => (
 const PhoneIcon = ({ className = "" }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
 );
-const Star = () => <svg className="h-4 w-4 fill-amber-400 text-amber-400" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>;
 
 export default function Home() {
   useReveal();
@@ -71,7 +65,6 @@ export default function Home() {
           </a>
           <nav className="hidden items-center gap-8 text-sm font-medium text-[var(--color-muted-ink)] md:flex">
             <a href="#how" onClick={scrollTo("how")} className="transition hover:text-[var(--color-ink)]">How it works</a>
-            <a href="#carriers" onClick={scrollTo("carriers")} className="transition hover:text-[var(--color-ink)]">Carriers</a>
             <a href="#faq" onClick={scrollTo("faq")} className="transition hover:text-[var(--color-ink)]">FAQ</a>
           </nav>
           <div className="flex items-center gap-2 sm:gap-4">
@@ -119,17 +112,75 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="carriers" className="bg-white py-12">
+      <section className="relative py-20 overflow-hidden" style={{ backgroundColor: "#F0F6FF" }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <p className="text-center text-sm font-semibold uppercase tracking-widest text-[var(--color-muted-ink)]">Trusted by drivers comparing quotes from:</p>
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
-            {CARRIERS.map((c) => (
-              <span key={c} className="rounded-full border border-[var(--color-line)] bg-white px-4 py-2 text-sm font-semibold shadow-sm transition hover:border-[var(--color-coral)] hover:shadow-md">{c}</span>
+          <div className="reveal text-center">
+            <div className="flex justify-center gap-1.5 mb-6">
+              <span className="h-2 w-2 rounded-full bg-[var(--color-coral)]" />
+              <span className="h-2 w-2 rounded-full bg-slate-300" />
+              <span className="h-2 w-2 rounded-full bg-slate-300" />
+            </div>
+            <h2 className="text-3xl font-extrabold tracking-tight text-[var(--color-ink)] sm:text-4xl lg:text-5xl">Why we&apos;re better than others</h2>
+            <p className="mt-4 mx-auto max-w-xl text-[var(--color-muted-ink)] leading-relaxed">
+              Many of us spend countless hours filling endless documentation just to find out there is no relevant policy. Our platform makes sure you are presented with the top options in one place.
+            </p>
+          </div>
+
+          <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              {
+                title: "Free, always",
+                body: "The service is free and you are never obligated to buy the presented policy. No hidden fees, no credit card required. Just real rates from real carriers, at no cost to you.",
+                icon: (
+                  <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/>
+                  </svg>
+                ),
+              },
+              {
+                title: "No spam calls",
+                body: "Compare quotes without a flood of follow-up calls. You decide who to talk to. We never sell your phone number to telemarketers. Your contact details stay between you and the carrier you choose.",
+                icon: (
+                  <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="1" y1="1" x2="23" y2="23"/><path d="M16.5 16.5L19 19a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 5 14M10.29 10.29A19.5 19.5 0 0 0 5.07 8.67 2 2 0 0 0 4.11 11L4 11a2 2 0 0 0 2 2"/>
+                  </svg>
+                ),
+              },
+              {
+                title: "Real-time matching",
+                body: "Your details are compared live against a database connected to dozens of top insurance carriers. The quotes you see reflect actual current rates, not ballpark estimates generated days later.",
+                icon: (
+                  <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                  </svg>
+                ),
+              },
+              {
+                title: "Carriers you recognize",
+                body: "Get matched with established providers you actually know, willing to insure you. No obscure names, only trusted carriers with strong reputations and solid claims track records.",
+                icon: (
+                  <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                  </svg>
+                ),
+              },
+            ].map((f) => (
+              <div key={f.title} className="reveal rounded-3xl bg-white p-7 shadow-sm flex flex-col gap-4">
+                <div className="w-12 h-12 rounded-2xl bg-[var(--color-coral)]/10 flex items-center justify-center text-[var(--color-coral)] shrink-0">
+                  {f.icon}
+                </div>
+                <h3 className="font-bold text-[var(--color-ink)]">{f.title}</h3>
+                <p className="text-sm leading-relaxed text-[var(--color-muted-ink)]">{f.body}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
+      {/* Estimate calculator — white */}
+      <CarValueSlider onCtaClick={() => document.getElementById("top")?.scrollIntoView({ behavior: "smooth" })} />
+
+      {/* How it works — #F0F6FF */}
       <section id="how" className="py-20" style={{ backgroundColor: "#F0F6FF" }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="reveal mx-auto max-w-2xl text-center">
@@ -155,31 +206,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-white py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="reveal mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">Real Drivers. Real Savings.</h2>
-            <p className="mt-3 text-[var(--color-muted-ink)]">Thousands of drivers found a better rate this month.</p>
-          </div>
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {TESTIMONIALS.map((t) => (
-              <article key={t.n} className="reveal flex flex-col rounded-3xl border border-[var(--color-line)] bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
-                <div className="flex gap-0.5">{Array.from({ length: 5 }).map((_, k) => <Star key={k} />)}</div>
-                <p className="mt-4 flex-1 leading-relaxed">&ldquo;{t.q}&rdquo;</p>
-                <div className="mt-6 flex items-center justify-between border-t border-[var(--color-line)] pt-4">
-                  <div className="min-w-0">
-                    <div className="font-bold">{t.n}</div>
-                    <div className="text-sm text-[var(--color-muted-ink)]">{t.l}</div>
-                  </div>
-                  <span className="shrink-0 rounded-full bg-[var(--color-coral)] px-3 py-1.5 text-xs font-bold text-white shadow-sm">saved {t.s}</span>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <CarValueSlider onCtaClick={() => document.getElementById("top")?.scrollIntoView({ behavior: "smooth" })} />
+      {/* Testimonials — white */}
+      <TestimonialsCarousel />
 
       <section className="relative py-16 overflow-hidden" style={{ background: "linear-gradient(135deg, #0D1B2A 0%, #1B3A5C 100%)" }}>
         <Image src="/highway.jpg" alt="" fill sizes="100vw" className="object-cover opacity-25" />
@@ -200,7 +228,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="faq" className="bg-white py-20">
+      <section id="faq" className="py-20" style={{ backgroundColor: "#F0F6FF" }}>
         <div className="mx-auto max-w-3xl px-4 sm:px-6">
           <div className="reveal text-center">
             <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">Common Questions</h2>
