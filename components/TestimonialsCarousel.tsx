@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const TESTIMONIALS = [
   {
@@ -72,7 +72,14 @@ function Avatar({ name, img }: { name: string; img: string }) {
 
 export default function TestimonialsCarousel() {
   const [current, setCurrent] = useState(0);
+  const [atStart, setAtStart] = useState(true);
+  const [atEnd, setAtEnd] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
+
+  const updateEdges = (track: HTMLDivElement) => {
+    setAtStart(track.scrollLeft <= 1);
+    setAtEnd(track.scrollLeft + track.clientWidth >= track.scrollWidth - 1);
+  };
 
   const goTo = (i: number) => {
     setCurrent(i);
@@ -85,6 +92,7 @@ export default function TestimonialsCarousel() {
   const handleScroll = () => {
     const track = trackRef.current;
     if (!track) return;
+    updateEdges(track);
     const cards = Array.from(track.children) as HTMLElement[];
     const scrollLeft = track.scrollLeft;
     let closest = 0;
@@ -95,6 +103,11 @@ export default function TestimonialsCarousel() {
     });
     if (closest !== current) setCurrent(closest);
   };
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (track) updateEdges(track);
+  }, []);
 
   return (
     <section className="bg-white py-20">
@@ -149,7 +162,7 @@ export default function TestimonialsCarousel() {
           <div className="mt-8 flex items-center justify-center gap-3">
             <button
               onClick={() => goTo(Math.max(0, current - 1))}
-              disabled={current === 0}
+              disabled={atStart}
               className="grid h-10 w-10 place-items-center rounded-full border border-[var(--color-line)] bg-white shadow-sm transition hover:border-[var(--color-coral)] hover:text-[var(--color-coral)] disabled:opacity-30 disabled:cursor-not-allowed"
               aria-label="Previous testimonial"
             >
@@ -171,7 +184,7 @@ export default function TestimonialsCarousel() {
 
             <button
               onClick={() => goTo(Math.min(TESTIMONIALS.length - 1, current + 1))}
-              disabled={current === TESTIMONIALS.length - 1}
+              disabled={atEnd}
               className="grid h-10 w-10 place-items-center rounded-full border border-[var(--color-line)] bg-white shadow-sm transition hover:border-[var(--color-coral)] hover:text-[var(--color-coral)] disabled:opacity-30 disabled:cursor-not-allowed"
               aria-label="Next testimonial"
             >
