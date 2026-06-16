@@ -2,32 +2,45 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 
 type Vehicle = {
-  vehicleMake?: string;
   vehicleYear?: number;
+  vehicleMake?: string;
   vehicleModel?: string;
+  primaryUse?: string;
+  mileage?: string;
+  coverage?: string;
+  ownership?: string;
 };
 
 export type FormData = {
-  zipCode: string;
-  vehicles: Vehicle[];
-  currentVehicleIndex: number;
-  street?: string;
-  email?: string;
-  phone?: string;
-  firstName?: string;
-  lastName?: string;
-  dob?: string;
-  gender?: string;
-  married?: string;
-  homeowner?: string;
-  military?: string;
-  education?: string;
-  creditScore?: string;
-  currentInsurance?: string;
-  continuousCoverage?: string;
-  activeLicense?: string;
-  sr22Filed?: string;
-  ticketsLast3Years?: string;
+  leadId?: string;
+  zipCode?: string;
+    //   vehicleMake?: string;
+    //   vehicleYear?: number;
+    //   vehicleModel?: string;
+    //   primaryUse?: string;
+    //   mileage?: string;
+    //   coverage?: string;
+    //   ownership?: string;
+    vehicles: Vehicle[];
+    currentVehicleIndex: number;
+    currentlyInsured?: string;
+    currentInsurance?: string;
+    continuousCoverage?: string;
+    activeLicense?: string;
+    ticketsLast3Years?: string;
+    sr22Filed?: string;
+    homeowner?: string;
+    married?: string;
+    gender?: string;
+    military?: string;
+    education?: string;
+    creditScore?: string;
+    dob?: string;
+    firstName?: string;
+    lastName?: string;
+    street?: string;
+    email?: string;
+    phone?: string;
 };
 
 type FormContextType = {
