@@ -1,6 +1,8 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useForm } from "@/context/FormContext";
 
 
 const FAQS = [
@@ -42,6 +44,7 @@ import CarValueSlider from "@/components/CarValueSlider";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
 import QuoteHighlighter from "@/components/QuoteHighlighter";
 import CountUp from "@/components/CountUp";
+import USMap from "@/components/USMap";
 
 const CheckIcon = () => (
   <svg className="h-4 w-4 text-[var(--color-emerald-accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -52,7 +55,21 @@ const PhoneIcon = ({ className = "" }: { className?: string }) => (
 
 export default function Home() {
   useReveal();
+  const router = useRouter();
+  const { updateForm } = useForm();
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [zipHero, setZipHero] = useState("");
+  const [zipCta, setZipCta] = useState("");
+
+  const startQuiz = (zip: string, inputId: string) => {
+    if (!zip.trim()) {
+      document.getElementById(inputId)?.focus();
+      return;
+    }
+    updateForm({ zipCode: zip.trim() });
+    router.push("/quote/1_map");
+  };
+
   const scrollTo = (id: string) => (e: React.MouseEvent) => {
     e.preventDefault();
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -85,7 +102,7 @@ export default function Home() {
             <a href="#how" onClick={scrollTo("how")} className="transition hover:text-[var(--color-ink)]">How it Works</a>
             <a href="#reviews" onClick={scrollTo("reviews")} className="transition hover:text-[var(--color-ink)]">Reviews</a>
             <a href="#faq" onClick={scrollTo("faq")} className="transition hover:text-[var(--color-ink)]">FAQ</a>
-            <a href="#contact" onClick={scrollTo("contact")} className="transition hover:text-[var(--color-ink)]">Contact</a>
+            <a href="/contact" className="transition hover:text-[var(--color-ink)]">Contact</a>
           </nav>
           <div className="flex items-center gap-2 sm:gap-4">
             <a href="tel:18005550123" className="hidden items-center gap-2 text-sm font-semibold sm:flex">
@@ -109,11 +126,12 @@ export default function Home() {
               Find Your Best Rate in <span className="text-[var(--color-coral)]">90 Seconds</span>
             </h1>
             <p className="mt-5 max-w-lg text-lg text-white/75">Compare 40+ top insurers side by side. Free, fast, no spam.</p>
-            <form onSubmit={(e) => e.preventDefault()} className="mt-8 max-w-md">
+            <form onSubmit={(e) => { e.preventDefault(); startQuiz(zipHero, "zip-hero"); }} className="mt-8 max-w-md">
               <label htmlFor="zip-hero" className="sr-only">ZIP code</label>
               <input id="zip-hero" type="text" inputMode="numeric" maxLength={5} placeholder="Enter your ZIP code"
+                value={zipHero} onChange={(e) => setZipHero(e.target.value)}
                 className="w-full rounded-lg border-2 border-white/10 bg-white px-5 py-4 text-lg font-semibold text-[var(--color-ink)] placeholder:text-slate-400 outline-none transition focus:border-[var(--color-coral)] focus:ring-4 focus:ring-[var(--color-coral)]/30" />
-              <button type="button" onClick={(e) => { e.preventDefault(); document.getElementById("zip-hero")?.focus(); }}
+              <button type="submit"
                 className="mt-3 w-full rounded-lg bg-[var(--color-coral)] px-6 py-4 text-sm font-extrabold uppercase tracking-widest text-white shadow-[0_10px_30px_-10px_rgba(255,92,58,0.6)] transition hover:scale-[1.02] hover:bg-[var(--color-coral-dark)]">
                 Get My Free Quotes →
               </button>
@@ -285,7 +303,21 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="contact" className="bg-white py-20">
+      <section className="bg-white py-16 px-4 sm:px-6 reveal">
+        <div className="mx-auto max-w-6xl">
+          <USMap onMapClick={() => router.push("/quote/1_map")} />
+          <div className="mt-8 text-center">
+            <button
+              onClick={() => router.push("/quote/1_map")}
+              className="inline-block rounded-xl bg-[var(--color-coral)] px-8 py-3 text-sm font-extrabold uppercase tracking-widest text-white shadow-sm transition hover:bg-[var(--color-coral-dark)] hover:scale-[1.02]"
+            >
+              Compare Rates in My State →
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" className="py-20" style={{ backgroundColor: "#F0F6FF" }}>
         <div className="mx-auto max-w-5xl px-4 sm:px-6">
           <h2 className="reveal text-center text-4xl font-extrabold tracking-tight text-[var(--color-ink)] sm:text-5xl">
             It&apos;s easy to start saving.
@@ -303,15 +335,16 @@ export default function Home() {
               <p className="mt-2 max-w-xs text-sm leading-relaxed text-[var(--color-muted-ink)]">
                 Our easy-to-use tools let you compare quotes from top carriers side by side, all at once and in minutes.
               </p>
-              <form onSubmit={(e) => e.preventDefault()} className="mt-6 w-full max-w-sm space-y-3">
+              <form onSubmit={(e) => { e.preventDefault(); startQuiz(zipCta, "zip-cta"); }} className="mt-6 w-full max-w-sm space-y-3">
                 <div className="flex items-center gap-2 rounded-lg border-2 border-[var(--color-line)] bg-white px-4 py-3 transition focus-within:border-[var(--color-coral)] focus-within:ring-2 focus-within:ring-[var(--color-coral)]/20">
                   <svg viewBox="0 0 24 24" className="h-4 w-4 shrink-0 text-[var(--color-muted-ink)]" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
                   </svg>
                   <input id="zip-cta" type="text" inputMode="numeric" maxLength={5} placeholder="ZIP code"
+                    value={zipCta} onChange={(e) => setZipCta(e.target.value)}
                     className="flex-1 bg-transparent text-sm font-semibold text-[var(--color-ink)] placeholder:text-slate-400 outline-none" />
                 </div>
-                <button type="button" onClick={() => document.getElementById("zip-cta")?.focus()}
+                <button type="submit"
                   className="w-full rounded-xl bg-[var(--color-coral)] py-3 text-sm font-extrabold uppercase tracking-widest text-white shadow-sm transition hover:bg-[var(--color-coral-dark)] hover:scale-[1.02]">
                   Get My Quotes →
                 </button>
@@ -364,7 +397,7 @@ export default function Home() {
                   { label: "How it Works", href: "#how" },
                   { label: "Reviews", href: "#reviews" },
                   { label: "FAQ", href: "#faq" },
-                  { label: "Contact", href: "#contact" },
+                  { label: "Contact", href: "/contact" },
                 ].map((x) => (
                   <li key={x.label}>
                     <a href={x.href} className="transition hover:text-white">{x.label}</a>
@@ -372,17 +405,27 @@ export default function Home() {
                 ))}
               </ul>
             </div>
-            {[
-              { h: "Resources", l: ["Insurance Guide", "Savings Calculator", "Blog", "Help Center"] },
-              { h: "Legal", l: ["Privacy Policy", "Terms of Use", "Licenses", "Do Not Sell My Info"] },
-            ].map((col) => (
-              <div key={col.h}>
-                <h4 className="text-sm font-bold uppercase tracking-widest text-white">{col.h}</h4>
-                <ul className="mt-4 space-y-2 text-sm text-white/60">
-                  {col.l.map((x) => <li key={x}><a href="#" className="transition hover:text-white">{x}</a></li>)}
-                </ul>
-              </div>
-            ))}
+            <div>
+              <h4 className="text-sm font-bold uppercase tracking-widest text-white">Resources</h4>
+              <ul className="mt-4 space-y-2 text-sm text-white/60">
+                {["Insurance Guide", "Savings Calculator", "Blog", "Help Center"].map((x) => (
+                  <li key={x}><a href="#" className="transition hover:text-white">{x}</a></li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-sm font-bold uppercase tracking-widest text-white">Legal</h4>
+              <ul className="mt-4 space-y-2 text-sm text-white/60">
+                {[
+                  { label: "Privacy Policy", href: "/privacy-policy" },
+                  { label: "Terms of Use", href: "/terms-of-use" },
+                  { label: "Licenses", href: "#" },
+                  { label: "Do Not Sell My Info", href: "#" },
+                ].map((x) => (
+                  <li key={x.label}><a href={x.href} className="transition hover:text-white">{x.label}</a></li>
+                ))}
+              </ul>
+            </div>
           </div>
           <div className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-white/50 sm:flex-row sm:items-center sm:justify-between">
             <div>© {new Date().getFullYear()} TryAutoQuote. All rights reserved.</div>
